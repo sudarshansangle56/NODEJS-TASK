@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crypto Data</title>
+  <style>
+    body {
+      background-color: #191d28;
+      color: #ffffff; /* Text color for better readability */
+      font-family: Arial, sans-serif;
+    }
+
+    table {
+      width: calc(100% - 40px); /* Adjust table width to accommodate margin */
+      margin-left: 20px; /* Apply margin to the whole table */
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      
+    }
+
+    th {
+      color: #808289; /* Color for table headers */
+    }
+
+    td {
+      color: white; /* Color for table data cells */
+    }
+
+    /* Row background colors */
+    .row-1,
+    .row-2,
+    .row-3,
+    .row-4,
+    .row-5,
+    .row-6,
+    .row-7,
+    .row-8,
+    .row-9,
+    .row-10,
+    .row-11,
+    .row-12,
+    .row-13,
+    .row-14,
+    .row-15,
+    .row-16,
+    .row-17,
+    .row-18,
+    .row-19,
+    .row-20 {
+      background-color: #888da0c7;
+      height: 50px;
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    /* Optional: Add spacing between rows */
+    tbody tr + tr {
+      border-top: 20px solid #191d28; /* Space between rows */
+    }
+    .table-wrapper {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Crypto Data</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <!-- New column for numbering -->
+        <th>Platform</th>
+        <th>Last Traded Price</th>
+        <th>Buy Price</th>
+        <th>Sell Price</th>
+        <th>Difference (%)</th>
+        <th>Savings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach((item, index) => { %>
+      <tr class="<%= `row-${(index % 20) + 1}` %>">
+        <td><%= index + 1 %></td>
+        <!-- Sequential numbers -->
+        <td><%= item.name %></td>
+        <td>₹<%= item.last %></td>
+        <td>₹<%= item.buy %></td>
+        <td>₹<%= item.sell %></td>
+        <td>
+          <% if (item.buy > 0) { %> <%= (((item.sell - item.buy) / item.buy) * 100).toFixed(2) %> <% } else { %> N/A <% } %>
+        </td>
+        <td>
+          <% if (item.buy > 0) { %> <%= (item.sell - item.buy).toFixed(2) %> <% } else { %> N/A <% } %>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
